@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "prebuild":"rm -rf ./electrontest-darwin* && cd elecontent && npm run build",
-    "build":"electron-packager .",
+    "start": "NODE_ENV=dev electron .",
+    "prebuild":"rm -rf electrontest-darwin* && rm -rf bundl* && cd content && npm run build",
+    "build":"NODE_ENV=production electron-packager .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postbuild":"cd electrontest* && open ."
   },
