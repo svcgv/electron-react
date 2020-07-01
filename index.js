@@ -3,7 +3,7 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 var net = require('net')
 const env = process.env.NODE_ENV
-var getProcessForPort = require('./getProcessForPort')
+var getProcessForPort = require('./src/utils/getProcessForPort')
 let listenInterval = 0
 let mainWindow
 function createWindow () {
