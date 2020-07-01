@@ -4,16 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=dev electron .",
-    "prebuild":"rm -rf electrontest-darwin* && rm -rf bundl* && cd content && npm run build",
-    "build":"NODE_ENV=production electron-packager .",
+    "start": "concurrently 'cd content && npm start' 'NODE_ENV=dev electron . --debug'",
+    "prebuild": "rm -rf electrontest-darwin* && rm -rf bundl* && cd content && npm run build",
+    "build": "NODE_ENV=production electron-packager .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postbuild":"cd electrontest* && open ."
+    "postbuild": "cd electrontest* && open ."
   },
   "author": "hb",
   "license": "MIT",
   "devDependencies": {
     "electron": "^9.0.5",
     "electron-packager": "^15.0.0"
+  },
+  "dependencies": {
+    "concurrently": "^5.2.0"
   }
 }
