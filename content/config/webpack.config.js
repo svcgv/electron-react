@@ -323,7 +323,15 @@ module.exports = function(webpackEnv) {
       rules: [
         // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
-
+        {
+          test: /\.ts|tsx$/, //ts-loader必须在其他处理.js的加载器之前运行
+          use: 'awesome-typescript-loader'//之前安装的是ts-loader 导致模块导出的时候报错exports is no defined,在这里替换掉
+        },
+        {
+          test: /\.js|jsx$/,
+          use: 'babel-loader',
+          exclude: /(node_modules|bower_components)/
+        },
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
         {
