@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
-    "@material-ui/core": "^4.10.2",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -37,6 +38,8 @@
     "jest-environment-jsdom-fourteen": "1.0.1",
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
+    "material-ui": "^1.0.0-beta.47",
+    "material-ui-icons": "^1.0.0-beta.36",
     "mini-css-extract-plugin": "0.9.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
@@ -72,20 +75,25 @@
     "postbuild": "mv build ../client/bundle"
   },
   "eslintConfig": {
-      "env": {
-        "commonjs": true,
-        "node": true,
-        "browser": true,
-        "serviceworker": true
-      },
-      "parser": "babel-eslint",
-      "extends": ["standard", "standard-react"],
-      "plugins": ["react-hooks"],
-      "rules": {
-        "react/prop-types": 0,
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "error"
-      }
+    "env": {
+      "commonjs": true,
+      "node": true,
+      "browser": true,
+      "serviceworker": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+      "standard",
+      "standard-react"
+    ],
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react/prop-types": 0,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error"
+    }
   },
   "browserslist": {
     "production": [
