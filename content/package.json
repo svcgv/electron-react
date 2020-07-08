@@ -24,13 +24,11 @@
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
     "eslint": "^6.6.0",
-    "eslint-config-react-app": "^5.2.1",
     "eslint-loader": "3.0.3",
-    "eslint-plugin-flowtype": "4.6.0",
-    "eslint-plugin-import": "2.20.1",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.19.0",
-    "eslint-plugin-react-hooks": "^1.6.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.5",
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.11",
@@ -74,7 +72,20 @@
     "postbuild": "mv build ../bundle"
   },
   "eslintConfig": {
-    "extends": "react-app"
+      "env": {
+        "commonjs": true,
+        "node": true,
+        "browser": true,
+        "serviceworker": true
+      },
+      "parser": "babel-eslint",
+      "extends": ["standard", "standard-react"],
+      "plugins": ["react-hooks"],
+      "rules": {
+        "react/prop-types": 0,
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "error"
+      }
   },
   "browserslist": {
     "production": [
@@ -146,7 +157,29 @@
   },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "pretty": "^2.0.0",
     "source-map-loader": "^1.0.0",
+    "standard": "^14.3.4",
     "typescript": "^3.9.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx}": [
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120
   }
 }

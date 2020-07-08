@@ -14,9 +14,13 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^9.0.5",
-    "electron-packager": "^15.0.0"
+    "electron-packager": "^15.0.0",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.0"
   },
   "dependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^5.2.0",
+    "eslint": "^7.4.0"
   }
 }
