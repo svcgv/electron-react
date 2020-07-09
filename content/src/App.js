@@ -6,7 +6,9 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 import Layouts from './layouts'
 import Home from './pages/home'
 import Password from './pages/password'
-import Download from './pages/download'
+import DownloadIng from './pages/download/downloading'
+import DownloadConfig from './pages/download/config'
+import DownloadFinish from './pages/download/finish'
 
 function App () {
   return (
@@ -16,7 +18,9 @@ function App () {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/password' component={Password} />
-            <Route path='/download' component={Download} />
+            <Route path='/download/downloading' component={DownloadIng} />
+            <Route path='/download/finish' component={DownloadFinish} />
+            <Route path='/download/config' component={DownloadConfig} />
           </Switch>
         </HashRouter>
       </Layouts>

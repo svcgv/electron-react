@@ -10,6 +10,9 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import Collapse from '@material-ui/core/Collapse'
 import { menuArr } from './data'
 
 const drawerWidth = 240
@@ -35,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     marginTop: '40px'
+  },
+  nested: {
+    paddingLeft: theme.spacing(4)
   }
 }))
 
@@ -72,11 +78,25 @@ export default function ClippedDrawer (props) {
         <div className={classes.drawerContainer}>
           <List>
             {menuArr.map((item, index) => (
-              <ListItem button key={item.name} onClick={() => { handleClick(item) }}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.name} />
-                {item.children && showMenuArr[index] && 'asdasdsa'}
-              </ListItem>
+              <>
+                <ListItem button key={item.name} onClick={() => { handleClick(item) }}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.name} />
+                  {item.children ? showMenuArr[index] ? <ExpandLess /> : <ExpandMore /> : null}
+                </ListItem>
+                {item.children && (
+                  <Collapse in={showMenuArr[index]} timeout='auto' unmountOnExit>
+                    <List component='div' disablePadding>
+
+                      {item.children.map(item2 => (
+                        <ListItem key={item2.url} button className={classes.nested} onClick={() => { handleClick(item2) }}>
+                          <ListItemIcon />
+                          <ListItemText primary={item2.name} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse>)}
+              </>
             ))}
           </List>
           <Divider />
