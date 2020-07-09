@@ -196,5 +196,7 @@
   },
   "prettier": {
     "printWidth": 120
-  }
+  },
+  "author": "svcgv",
+  "license": "MIT"
 }
