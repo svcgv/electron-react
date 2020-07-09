@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
@@ -10,8 +10,8 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-
 import { menuArr } from './data'
+
 const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
@@ -33,12 +33,24 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    marginTop: '40px'
   }
 }))
 
 export default function ClippedDrawer (props) {
   const classes = useStyles()
+  const [showMenuArr, setShowMenuArr] = useState([])
+  const handleClick = (data) => {
+    if (data.children) {
+      const index = menuArr.indexOf(data)
+      const showArr = [...showMenuArr]
+      showArr[index] = !showMenuArr[index]
+      setShowMenuArr(showArr)
+      return
+    }
+    window.location.hash = `${data.url}`
+  }
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -60,26 +72,19 @@ export default function ClippedDrawer (props) {
         <div className={classes.drawerContainer}>
           <List>
             {menuArr.map((item, index) => (
-              <ListItem button key={item.name}>
+              <ListItem button key={item.name} onClick={() => { handleClick(item) }}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.name} />
+                {item.children && showMenuArr[index] && 'asdasdsa'}
               </ListItem>
             ))}
           </List>
           <Divider />
-          {/* <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List> */}
         </div>
       </Drawer>
       <main className={classes.content}>
+        <br />
         {props.children}
       </main>
-    </div>
-  )
+    </div>)
 }

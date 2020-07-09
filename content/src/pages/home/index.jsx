@@ -1,9 +1,16 @@
 import React from 'react'
+// import { connect } from 'react-redux'
 
-export default function homePage () {
+// @connect(({ home }) => ({ home }))
+function homePage (props) {
+  // render () {
+  // const { home } = this.props
+  // console.log(home)
   return (
     <div>
-      asdasdasd
+      主页
     </div>
   )
+  // }
 }
+export default homePage
