@@ -2,6 +2,7 @@ import CryptoJS from 'crypto-js'
 
 var key = 'aPasswordfa'
 var iv = '12345678abcdefgh'
+
 export function getPassword (commonwords = '', attribute = '', maxSize = 12) {
   const commonArr = commonwords.split('')
   const attributeArr = attribute.split('')
@@ -11,16 +12,19 @@ export function getPassword (commonwords = '', attribute = '', maxSize = 12) {
   } else {
     arr = mergeTwoArr(commonArr, attributeArr)
   }
-  const fullPassword = encrypt(arr.join(''))
+  const prePass = arr.join('')
+  const pass = prePass.slice(0, maxSize)
+  const fullPassword = encrypt(pass)
   return `${fullPassword}`.slice(fullPassword.length - maxSize, maxSize)
 }
 
 function mergeTwoArr (smallArray = [], bigArray = []) {
   const arr = []
-  for (let i = 0; i < bigArray.length; i++) {
+  const length = bigArray.length
+  for (let i = 0; i < length; i++) {
     const a = bigArray.pop()
     const b = smallArray.pop()
-    if (i % 2 === 1) {
+    if (i % 2 === 0) {
       a && arr.push(a)
       b && arr.push(b)
     } else {
@@ -28,9 +32,12 @@ function mergeTwoArr (smallArray = [], bigArray = []) {
       b && arr.unshift(b)
     }
   }
+  const lengthStr = arr.length.toString(16)
+  arr.unshift(lengthStr)
   return arr
 }
-function encrypt (text) {
+
+export function encrypt (text) {
   return CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(key), {
     iv: CryptoJS.enc.Utf8.parse(iv),
     mode: CryptoJS.mode.CBC,
@@ -38,7 +45,7 @@ function encrypt (text) {
   })
 }
 
-function decrypt (text) {
+export function decrypt (text) {
   var result = CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(key), {
     iv: CryptoJS.enc.Utf8.parse(iv),
     mode: CryptoJS.mode.CBC,
@@ -46,8 +53,3 @@ function decrypt (text) {
   })
   return result.toString(CryptoJS.enc.Utf8)
 }
-
-var text = 'ni你好hao'
-var encoded = encrypt(text)
-console.log(encoded.toString())
-console.log(decrypt(encoded))
